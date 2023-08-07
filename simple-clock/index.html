@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Clock</title>
+</head>
+<body>
+    <div class="clock">
+        <div class="hour"></div>
+        <div class="min"></div>
+        <div class="sec"></div>
+    </div>
+    <script>
+        const secondHand = document.querySelector('.sec')
+        const minuteHand = document.querySelector('.min')
+        const hourHand = document.querySelector('.hour')
+
+        function setDate() {
+            const now = new Date();
+            const seconds = now.getSeconds();
+            const minutes = now.getMinutes();
+            const hours = now.getHours();
+
+            const secondsDegrees = (seconds / 60) * 360 + 90;
+            const minutesDegrees = (minutes / 60) * 360 + 90;
+            const hoursDegrees = calculateHourAngle(hours, minutes);
+
+            secondHand.style.transform = `rotate(${secondsDegrees}deg)`
+            minuteHand.style.transform = `rotate(${minutesDegrees}deg)`
+            hourHand.style.transform = `rotate(${hoursDegrees}deg)`
+
+            function calculateHourAngle(hours, minutes) {
+                const hourFraction = (minutes / 60);
+                const adjustedHour = hours % 12 + hourFraction;
+                const hoursDegrees = (adjustedHour / 12) * 360 + 90;
+                return hoursDegrees;
+            }
+        }
+
+        setInterval(setDate, 1000);
+    
+    </script>
+</body>
+</html>
