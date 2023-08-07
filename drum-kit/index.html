@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
     <title>Drum Kit</title>
 </head>
 <body>
@@ -55,21 +56,5 @@
     <audio data-key="74" src="sounds/snare.mp3"></audio>
     <audio data-key="75" src="sounds/tom.mp3"></audio>
     <audio data-key="76" src="sounds/punch.wav"></audio>
-
-<script>
-    window.addEventListener('keydown', function (e) {
-        const key = document.querySelectorAll(`.key[data-key="${e.keyCode}"]`)
-        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-        if (!audio) return;
-        audio.currentTime = 0;
-        audio.play();
-        key.forEach((e) => {
-            e.classList.add('pressed');
-            setTimeout(() => {
-                e.classList.remove('pressed');
-            }, 100)
-        })
-    });
-</script>
 </body>
 </html>
